@@ -12,8 +12,7 @@ public class Event {
     private Date date;
     private String category;
 
-    public Event(Integer id, String name, String description, Date date, String category) {
-        this.id = id;
+    public Event(String name, String description, Date date, String category) {
         this.name = name;
         this.description = description;
         this.date = date;
