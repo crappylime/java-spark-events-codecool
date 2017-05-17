@@ -3,11 +3,7 @@ import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
-import  static spark.Spark.*;
+import static spark.Spark.*;
 
 
 public class Main {
@@ -24,7 +20,7 @@ public class Main {
         get("/", EventController::renderProducts, new ThymeleafTemplateEngine());
         // Equivalent with above
         get("/index", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render( EventController.renderProducts(req, res) );
+            return new ThymeleafTemplateEngine().render(EventController.renderProducts(req, res));
         });
     }
 
