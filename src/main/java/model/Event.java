@@ -12,12 +12,11 @@ public class Event {
     private Date date;
     private String category;
 
-    public Event(Integer id, String name, String description, Date date, String category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.category = category;
+    public Event(String name, String description, Date date, String category) {
+        this.setName(name);
+        this.setDescription(description);
+        this.setDate(date);
+        this.setCategory(category);
     }
 
     public Integer getId() {
