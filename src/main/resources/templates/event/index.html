@@ -16,6 +16,13 @@
 </div>
 
 <div class="container">
+    <form action="/index" method="post">
+        <input type="text" placeholder="Name your event!" name="name">
+        <input type="text" placeholder="Enter description optionally.." name="description">
+        <input type="datetime-local" placeholder="When will it happen?" name="date">
+        <input type="text" placeholder="Choose category:" name="category">
+        <button>Add event!</button>
+    </form>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -34,11 +41,6 @@
         </tr>
         </tbody>
     </table>
-    <div id="products" class="row list-group">
-        <div class="item col-xs-4 col-lg-4" th:each="event,iterStat : ${eventContainer}">
-           <div th:text="${event.name}"></div>
-        </div>
-    </div>
 </div>
 
 <div th:replace="footer :: copy"></div>

@@ -14,10 +14,15 @@ public class EventDaoSqlite implements EventDao {
 
     public EventDaoSqlite() {
         events = new ArrayList<>();
-        Event hackathon = new Event(0, "hackathon", "24h of work", new Date(), "game");
-        Event checkpoint = new Event(1, "checkpoint", "scary day", new Date(), "exam");
+        Event hackathon = new Event("hackathon", "24h of work", new Date(), "game");
+        Event checkpoint = new Event("checkpoint", "scary day", new Date(), "exam");
         events.add(hackathon);
         events.add(checkpoint);
+    }
+
+    @Override
+    public boolean add(Event event) {
+        return events.add(event);
     }
 
     @Override
