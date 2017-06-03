@@ -4,6 +4,7 @@ import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.*;
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 
 public class Main {
@@ -12,6 +13,7 @@ public class Main {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
+        enableDebugScreen();
 
         // Always start with more specific routes
         get("/hello", (req, res) -> "Hello World");
