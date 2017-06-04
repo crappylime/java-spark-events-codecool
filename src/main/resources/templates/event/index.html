@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Codecool events</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -16,7 +17,7 @@
 </div>
 
 <div class="container">
-    <form action="/index" method="post">
+    <form action="/events" method="post">
         <input type="text" placeholder="Name your event!" name="name">
         <input type="text" placeholder="Enter description optionally.." name="description">
         <input type="datetime-local" placeholder="When will it happen?" name="date">
@@ -27,15 +28,13 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
             <th>Date</th>
             <th>Category</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="event,iterStat : ${eventContainer}">
-            <td th:text="${event.name}">Event Name</td>
-            <td th:text="${event.description}">Event Description</td>
+        <tr th:each="event,iterStat : ${events}">
+            <td><a th:text="${event.name}" th:href="@{|events/${event.getId()}/show|}">link</a></td>
             <td th:text="${event.date}">Event Date</td>
             <td th:text="${event.category}">Event Category</td>
         </tr>
