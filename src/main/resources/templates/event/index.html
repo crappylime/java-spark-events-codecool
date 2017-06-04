@@ -25,6 +25,7 @@
             <th>Name</th>
             <th>Date</th>
             <th>Category</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
             <td><a th:text="${event.name}" th:href="@{|events/${event.getId()}/show|}">link</a></td>
             <td th:text="${event.date}">Event Date</td>
             <td th:text="${event.category}">Event Category</td>
+            <td><a th:href="@{|events/${event.getId()}/edit|}">edit</a></td>
         </tr>
         </tbody>
     </table>
