@@ -10,5 +10,7 @@ import java.util.List;
 public interface EventDao {
     boolean add(Event event);
 
+    Event find(int id);
+
     List<Event> getAll();
 }
