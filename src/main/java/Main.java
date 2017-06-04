@@ -29,6 +29,9 @@ public class Main {
         get("/events/:id/show", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.showEvent(req, res));
         });
+        get("/events/:id/edit", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(EventController.editEvent(req, res));
+        });
     }
 
 
