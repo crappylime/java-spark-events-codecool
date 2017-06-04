@@ -15,17 +15,19 @@ public class Main {
         port(8888);
         enableDebugScreen();
 
-        // Always start with more specific routes
-        get("/hello", (req, res) -> "Hello World");
-
-        // Always add generic routes to the end
-        get("/", EventController::renderEvents, new ThymeleafTemplateEngine());
-        // Equivalent with above
-        get("/index", (Request req, Response res) -> {
+        // routes
+        get("/", (Request req, Response res) -> {
+            res.redirect("/events");
+            return null;
+        });
+        get("/events", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.renderEvents(req, res));
         });
-        post("/index", (Request req, Response res) -> {
+        post("/events", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.addEvent(req, res));
+        });
+        get("/events/:id/show", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(EventController.showEvent(req, res));
         });
     }
 
