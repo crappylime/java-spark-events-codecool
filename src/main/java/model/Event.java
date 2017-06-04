@@ -12,7 +12,8 @@ public class Event {
     private Date date;
     private String category;
 
-    public Event(String name, String description, Date date, String category) {
+    public Event(Integer id, String name, String description, Date date, String category) {
+        this.setId(id);
         this.setName(name);
         this.setDescription(description);
         this.setDate(date);
