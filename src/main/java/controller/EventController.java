@@ -52,6 +52,25 @@ public class EventController {
         return null;
     }
 
+    public static ModelAndView editEvent(Request req, Response res) {
+        Integer eventId = Integer.valueOf(req.params(":id"));
+        Event event = eventDao.find(eventId);
+        event.setName(req.queryParams("name"));
+        event.setDescription(req.queryParams("description"));
+        String stringDate = req.queryParams("date");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd'T'HH:mm");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(stringDate);
+        } catch (ParseException ex) {
+            System.out.println("Exception " + ex);
+        }
+        event.setDate(date);
+        event.setCategory(req.queryParams("category"));
+//        eventDao.add(event);
+        res.redirect("/events");
+        return null;
+    }
     public static ModelAndView showEvent(Request req, Response res) {
         Integer eventId = Integer.valueOf(req.params(":id"));
         Event event = eventDao.find(eventId);
