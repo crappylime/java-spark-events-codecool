@@ -20,7 +20,7 @@ public class EventController {
     public static ModelAndView renderEvents(Request req, Response res) {
         List<Event> events = eventDao.getAll();
         Map params = new HashMap<>();
-        params.put("eventContainer", events);
+        params.put("events", events);
         return new ModelAndView(params, "event/index");
     }
 
@@ -32,14 +32,21 @@ public class EventController {
         Date date = null;
         try {
             date = simpleDateFormat.parse(stringDate);
-        }
-        catch (ParseException ex) {
-            System.out.println("Exception "+ex);
+        } catch (ParseException ex) {
+            System.out.println("Exception " + ex);
         }
         String category = req.queryParams("category");
-        Event event = new Event(name, description, date, category);
+        Event event = new Event(3, name, description, date, category);
         eventDao.add(event);
-        res.redirect("/");
+        res.redirect("/events");
         return null;
+    }
+
+    public static ModelAndView showEvent(Request req, Response res) {
+        Integer eventId = Integer.valueOf(req.params(":id"));
+        Event event = eventDao.find(eventId);
+        Map params = new HashMap<>();
+        params.put("event", event);
+        return new ModelAndView(params, "event/show");
     }
 }
