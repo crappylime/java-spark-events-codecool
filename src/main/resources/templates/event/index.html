@@ -17,13 +17,8 @@
 </div>
 
 <div class="container">
-    <form action="/events" method="post">
-        <input type="text" placeholder="Name your event!" name="name">
-        <input type="text" placeholder="Enter description optionally.." name="description">
-        <input type="datetime-local" placeholder="When will it happen?" name="date">
-        <input type="text" placeholder="Choose category:" name="category">
-        <button>Add event!</button>
-    </form>
+    <a href="/events/new"><button class="pull-right" type="submit">Add event!</button></a>
+
     <table class="table table-hover">
         <thead>
         <tr>

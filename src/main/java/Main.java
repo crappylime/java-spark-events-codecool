@@ -23,14 +23,14 @@ public class Main {
         get("/events", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.renderEvents(req, res));
         });
-        post("/events", (Request req, Response res) -> {
+        get("/events/new", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(EventController.renderEvent(req, res));
+        });
+        post("/events/new", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.addEvent(req, res));
         });
         get("/events/:id/show", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.showEvent(req, res));
-        });
-        get("/events/:id/edit", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(EventController.editEvent(req, res));
         });
     }
 

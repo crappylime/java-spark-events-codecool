@@ -24,6 +24,16 @@ public class EventController {
         return new ModelAndView(params, "event/index");
     }
 
+    public static ModelAndView renderEvent(Request req, Response res) {
+        Map params = new HashMap<>();
+        if (req.params(":id") != null) {
+            Integer eventId = Integer.valueOf(req.params(":id"));
+            Event event = eventDao.find(eventId);
+            params.put("event", event);
+        }
+        return new ModelAndView(params, "event/new");
+    }
+
     public static ModelAndView addEvent(Request req, Response res) {
         String name = req.queryParams("name");
         String description = req.queryParams("description");
