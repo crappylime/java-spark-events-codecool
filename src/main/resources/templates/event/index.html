@@ -4,11 +4,41 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Events</h1>
+    <h1><a href="/events">Codecool Events</a></h1>
 </div>
 
 <div class="container">
-    <a href="/events/new"><button class="pull-right" type="submit">Add event!</button></a>
+
+    <div class="row">
+        <div class="col-lg-3">
+            </form>
+            <form action="" method="get">
+                <div class="form-group">
+                    <input type="text" id="search" name="eventName" placeholder="Search..">
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2">
+            <form action="" method="get">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Category
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li th:each="cat,iterStat : ${categories}">
+                            <button class="btn btn-default btn-md btn-block" th:text="${cat}" type="submit"
+                                    name="category" th:value="${cat}">
+                                category
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <a href="/events/new">
+            <button class="btn btn-primary pull-right">Add event!</button>
+        </a>
+    </div>
 
     <table class="table table-hover">
         <thead>

@@ -49,8 +49,9 @@ public class Event {
     }
 
     public String getDateString() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd'T'HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         String dateString = simpleDateFormat.format(date);
+        dateString = dateString.replace("T", ", ");
         return dateString;
     }
 

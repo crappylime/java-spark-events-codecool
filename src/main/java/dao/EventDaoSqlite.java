@@ -11,7 +11,11 @@ import java.util.List;
  */
 public class EventDaoSqlite implements EventDao {
     private Connection connection;
-    List<Event> events;
+
+    public EventDaoSqlite() {
+        this.connection = connectToDb();
+        createTable();
+    }
 
     private Connection connectToDb() {
         System.out.println("Connection to Db...");
@@ -25,32 +29,33 @@ public class EventDaoSqlite implements EventDao {
         return connection;
     }
 
-    public EventDaoSqlite() {
-//        events = new ArrayList<>();
-//        hackathon = new Event(1, "hackathon", "24h of work", new Date(), "game");
-//        Event checkpoint = new Event(2, "checkpoint", "scary day", new Date(), "exam");
-//        events.add(hackathon);
-//        events.add(checkpoint);
-        this.connection = connectToDb();
+    private void createTable() {
+        System.out.println("Checking if table events was created...");
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS events\n" +
+                            "(\n" +
+                            "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                            "    name VARCHAR(46) NOT NULL,\n" +
+                            "    description VARCHAR(46),\n" +
+                            "    date DATE NOT NULL,\n" +
+                            "    category VARCHAR(46) NOT NULL\n" +
+                            ")"
+            );
+        } catch (SQLException e) {
+            System.out.println("Connect to DB failed");
+            System.out.println(e.getMessage());
+        }
     }
 
-        @Override
-        public List<Event> getAll() {
+    @Override
+    public List<Event> getAll() {
         List<Event> events = new ArrayList<>();
 
         try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM events");
-            while (rs.next()) {
-                Event event = new Event(
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getDate("date"),
-                        rs.getString("category")
-                );
-                event.setId(rs.getInt("id"));
-                events.add(event);
-            }
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM events");
+            events = getEvents(statement);
         } catch (SQLException e) {
             System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
@@ -131,5 +136,77 @@ public class EventDaoSqlite implements EventDao {
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public List<Event> getByEventName(String name) {
+        List<Event> events = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.
+                    prepareStatement("SELECT * FROM events WHERE name LIKE (?)");
+            statement.setString(1, "%" + name + "%");
+            events = getEvents(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return events;
+    }
+
+    @Override
+    public List<Event> getByCategory(String category) {
+        List<Event> events = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.
+                    prepareStatement("SELECT * FROM events WHERE category LIKE (?)");
+            statement.setString(1, "%" + category + "%");
+            events = getEvents(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+
+    @Override
+    public List<String> getCategories() {
+        List<Event> events = new ArrayList<>();
+        List<String> categories = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT DISTINCT category FROM events ORDER BY category");
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String category = rs.getString("category");
+                categories.add(category);
+            }
+        } catch (SQLException e) {
+            System.out.println("Connect to DB failed");
+            System.out.println(e.getMessage());
+        }
+        return categories;
+    }
+
+    private List<Event> getEvents(PreparedStatement statement) {
+        List<Event> events = new ArrayList<>();
+
+        try {
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Event event = new Event(
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDate("date"),
+                        rs.getString("category")
+                );
+                event.setId(rs.getInt("id"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
     }
 }

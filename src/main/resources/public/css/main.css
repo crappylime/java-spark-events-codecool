@@ -67,3 +67,18 @@ button {
     color: #fff;
     padding: 10px;
 }
+
+#search {
+    width: 230px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+#search:focus {
+    width: 70%;
+}
+
+.btn-default{
+    border:0px solid transparent; /* this was 1px earlier */
+}

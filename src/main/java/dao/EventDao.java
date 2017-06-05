@@ -17,4 +17,10 @@ public interface EventDao {
     List<Event> getAll();
 
     boolean update(Event event);
+
+    List<Event> getByCategory(String category);
+
+    List<Event> getByEventName(String name);
+
+    List<String> getCategories();
 }

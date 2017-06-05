@@ -19,8 +19,19 @@ public class EventController {
 
     public static ModelAndView renderEvents(Request req, Response res) {
         List<Event> events = eventDao.getAll();
+        List<String> categories = eventDao.getCategories();
         Map params = new HashMap<>();
+
+        if (req.queryParams("eventName") != null) {
+            System.out.println("Filter by name");
+            events = eventDao.getByEventName(req.queryParams("eventName"));
+        }
+        if (req.queryParams("category") != null) {
+            System.out.println("Filter by category");
+            events = eventDao.getByCategory(req.queryParams("category"));
+        }
         params.put("events", events);
+        params.put("categories", categories);
         return new ModelAndView(params, "event/index");
     }
 
@@ -38,7 +49,8 @@ public class EventController {
         String name = req.queryParams("name");
         String description = req.queryParams("description");
         String stringDate = req.queryParams("date");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd'T'HH:mm");
+        System.out.println(stringDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         Date date = null;
         try {
             date = simpleDateFormat.parse(stringDate);
@@ -58,7 +70,7 @@ public class EventController {
         event.setName(req.queryParams("name"));
         event.setDescription(req.queryParams("description"));
         String stringDate = req.queryParams("date");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd'T'HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         Date date = null;
         try {
             date = simpleDateFormat.parse(stringDate);
