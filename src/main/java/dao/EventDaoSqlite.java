@@ -32,6 +32,11 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
+    public boolean delete(int id) {
+        return events.remove(hackathon);
+    }
+
+    @Override
     public List<Event> getAll() {
         return events;
     }

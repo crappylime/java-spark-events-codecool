@@ -12,5 +12,7 @@ public interface EventDao {
 
     Event find(int id);
 
+    boolean delete(int id);
+
     List<Event> getAll();
 }
