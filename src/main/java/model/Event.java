@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,8 +13,7 @@ public class Event {
     private Date date;
     private String category;
 
-    public Event(Integer id, String name, String description, Date date, String category) {
-        this.setId(id);
+    public Event(String name, String description, Date date, String category) {
         this.setName(name);
         this.setDescription(description);
         this.setDate(date);
@@ -46,6 +46,12 @@ public class Event {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getDateString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd'T'HH:mm");
+        String dateString = simpleDateFormat.format(date);
+        return dateString;
     }
 
     public void setDate(Date date) {

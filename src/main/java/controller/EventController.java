@@ -46,7 +46,7 @@ public class EventController {
             System.out.println("Exception " + ex);
         }
         String category = req.queryParams("category");
-        Event event = new Event(3, name, description, date, category);
+        Event event = new Event(name, description, date, category);
         eventDao.add(event);
         res.redirect("/events");
         return null;
@@ -67,6 +67,7 @@ public class EventController {
         }
         event.setDate(date);
         event.setCategory(req.queryParams("category"));
+        eventDao.update(event);
         res.redirect("/events");
         return null;
     }
