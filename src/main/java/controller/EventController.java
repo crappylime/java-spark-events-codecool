@@ -31,7 +31,7 @@ public class EventController {
             Event event = eventDao.find(eventId);
             params.put("event", event);
         }
-        return new ModelAndView(params, "event/new");
+        return new ModelAndView(params, "event/form");
     }
 
     public static ModelAndView addEvent(Request req, Response res) {
