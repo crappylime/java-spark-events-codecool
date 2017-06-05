@@ -17,6 +17,8 @@
 </div>
 
 <div class="container">
+    <a href="/events"><button class="pull-right">Go back!</button></a>
+
     <form th:action="${event == null} ? '/events/new'" method="post" class="form-horizontal">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
