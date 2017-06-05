@@ -38,6 +38,12 @@ public class Main {
         post("/events/:id/edit", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.editEvent(req, res));
         });
+        get("/events/:id/delete", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(EventController.renderConfirmationWindow(req, res));
+        });
+        post("/events/:id/delete", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(EventController.deleteEvent(req, res));
+        });
     }
 
 
