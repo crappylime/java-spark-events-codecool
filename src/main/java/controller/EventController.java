@@ -31,7 +31,7 @@ public class EventController {
             Event event = eventDao.find(eventId);
             params.put("event", event);
         }
-        return new ModelAndView(params, "event/new");
+        return new ModelAndView(params, "event/form");
     }
 
     public static ModelAndView addEvent(Request req, Response res) {
@@ -67,10 +67,10 @@ public class EventController {
         }
         event.setDate(date);
         event.setCategory(req.queryParams("category"));
-//        eventDao.add(event);
         res.redirect("/events");
         return null;
     }
+
     public static ModelAndView showEvent(Request req, Response res) {
         Integer eventId = Integer.valueOf(req.params(":id"));
         Event event = eventDao.find(eventId);
