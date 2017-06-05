@@ -78,4 +78,19 @@ public class EventController {
         params.put("event", event);
         return new ModelAndView(params, "event/show");
     }
+
+    public static ModelAndView renderConfirmationWindow(Request req, Response res) {
+        Integer eventId = Integer.valueOf(req.params(":id"));
+        Event event = eventDao.find(eventId);
+        Map params = new HashMap<>();
+        params.put("event", event);
+        return new ModelAndView(params, "event/delete");
+    }
+
+    public static ModelAndView deleteEvent(Request req, Response res) {
+        Integer eventId = Integer.valueOf(req.params(":id"));
+        eventDao.delete(eventId);
+        res.redirect("/events");
+        return null;
+    }
 }
