@@ -18,19 +18,16 @@ public class EventDaoSqlite implements EventDao {
     }
 
     private Connection connectToDb() {
-        System.out.println("Connection to Db...");
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/database");
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
         return connection;
     }
 
     private void createTable() {
-        System.out.println("Checking if table events was created...");
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(
@@ -44,7 +41,6 @@ public class EventDaoSqlite implements EventDao {
                             ")"
             );
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
     }
@@ -57,7 +53,6 @@ public class EventDaoSqlite implements EventDao {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM events");
             events = getEvents(statement);
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
         return events;
@@ -76,7 +71,6 @@ public class EventDaoSqlite implements EventDao {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
         return true;
@@ -94,7 +88,6 @@ public class EventDaoSqlite implements EventDao {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
     }
@@ -118,7 +111,6 @@ public class EventDaoSqlite implements EventDao {
                 event.setId(rs.getInt("id"));
             }
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
         return event;
@@ -131,7 +123,6 @@ public class EventDaoSqlite implements EventDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
@@ -183,7 +174,6 @@ public class EventDaoSqlite implements EventDao {
                 categories.add(category);
             }
         } catch (SQLException e) {
-            System.out.println("Connect to DB failed");
             System.out.println(e.getMessage());
         }
         return categories;
