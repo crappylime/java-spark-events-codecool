@@ -29,16 +29,16 @@
             <artifactId>spark-debug-tools</artifactId>
             <version>0.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.18.0</version>
-        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1208</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.heroku.sdk/heroku-maven-plugin -->
+        <dependency>
+            <groupId>com.heroku.sdk</groupId>
+            <artifactId>heroku-maven-plugin</artifactId>
+            <version>1.1.4</version>
         </dependency>
     </dependencies>
 
