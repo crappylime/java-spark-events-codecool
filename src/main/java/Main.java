@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
-        port(8888);
+        port(getHerokuAssignedPort());
         enableDebugScreen();
 
         // routes
@@ -44,6 +44,14 @@ public class Main {
         post("/events/:id/delete", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(EventController.deleteEvent(req, res));
         });
+    }
+
+    private static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 }
