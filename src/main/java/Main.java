@@ -13,7 +13,7 @@ public class Main {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(getHerokuAssignedPort());
-        enableDebugScreen();
+        // enableDebugScreen();
 
         // routes
         get("/", (Request req, Response res) -> {
