@@ -2,7 +2,6 @@ package dao;
 
 import model.Event;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,8 @@ public class EventDaoSqlite implements EventDao {
             connection = DriverManager.getConnection(
                     // "jdbc:postgresql://hostname:port/dbname","username", "password"
                     "jdbc:postgresql://zqibwovfkyudwz:70b595402ea749aa748b77fe782313b7c90902038f9b19522bd974773e02aa49@ec2-54-163-254-143.compute-1.amazonaws.com:5432/d3o7ihuf3elkut",
-                        "zqibwovfkyudwz", "70b595402ea749aa748b77fe782313b7c90902038f9b19522bd974773e02aa49");
+                    "zqibwovfkyudwz", "70b595402ea749aa748b77fe782313b7c90902038f9b19522bd974773e02aa49"
+            );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
