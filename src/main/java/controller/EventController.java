@@ -23,11 +23,9 @@ public class EventController {
         Map params = new HashMap<>();
 
         if (req.queryParams("eventName") != null) {
-            System.out.println("Filter by name");
             events = eventDao.getByEventName(req.queryParams("eventName"));
         }
         if (req.queryParams("category") != null) {
-            System.out.println("Filter by category");
             events = eventDao.getByCategory(req.queryParams("category"));
         }
         params.put("events", events);
@@ -49,7 +47,6 @@ public class EventController {
         String name = req.queryParams("name");
         String description = req.queryParams("description");
         String stringDate = req.queryParams("date");
-        System.out.println(stringDate);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         Date date = null;
         try {
